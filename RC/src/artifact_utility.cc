@@ -11,7 +11,7 @@ int get_timeout(int argc, char ** argv) {
     return 3600*10;
   else {
     try {
-      timeout = stoi(argv[1]);
+      timeout = std::stoi(argv[1]);
     } catch (...) {
       timeout=3600*10;
     }
@@ -31,10 +31,10 @@ void set_result(const std::string & outDir, bool succeeded, double total_sec, in
   fout << eq_time << std::endl; // eqcheck
 }
 
-volatile sig_atomic_t int * glb_cegar_iter = NULL;
-volatile sig_atomic_t double * glb_syn_time = NULL;
-volatile sig_atomic_t double * glb_eq_time = NULL;
-volatile sig_atomic_t std::string glb_outDir;
+/*volatile*//*sig_atomic_t*/ int * glb_cegar_iter = NULL;
+/*volatile*//*sig_atomic_t*/ double * glb_syn_time = NULL;
+/*volatile*//*sig_atomic_t*/ double * glb_eq_time = NULL;
+/*volatile*//*sig_atomic_t*/ std::string glb_outDir;
  
 void handle_alarm( int sig ) {
   int cegar_iter    = glb_cegar_iter ? * glb_cegar_iter : 0;

@@ -3,11 +3,7 @@
 
 #include <ilang/ilang++.h>
 
-Ila BuildModel();
 
-// artifect utility
-int get_timeout(int argc, char ** argv);
-void set_result(const char * outDir, bool succeeded, double total_sec, int cegar_iter, double syn_time, double eq_time);
-void set_timeout(int sec);
+ilang::Ila BuildModel();
 
 #endif // RC_ILA_H__

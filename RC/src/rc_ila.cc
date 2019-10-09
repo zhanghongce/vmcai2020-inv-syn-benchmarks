@@ -1,3 +1,6 @@
+#include <rc_ila.h>
+
+using namespace ilang;
 
 Ila BuildModel() {
   auto m = Ila("counter");

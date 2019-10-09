@@ -1,9 +1,11 @@
 #include <rc_ila.h>
 #include "artifact_utility.h"
+#include <env.h>
 
 #include <ilang/vtarget-out/vtarget_gen.h>
 #include <ilang/vtarget-out/inv-syn/inv_syn_cegar.h>
 
+using namespace ilang;
 
 int main (int argc, char ** argv) {
 
@@ -29,8 +31,9 @@ int main (int argc, char ** argv) {
   auto outDir  = dirName + "verification/PdrAbc/";
 
   int n_cegar = 0;
-  double t_eq;
-  double t_syn;
+  double t_eq = 0;
+  double t_syn= 0;
+  double t_total=0;
   bool succeed = true;
   set_timeout(timeout, outDir, &n_cegar, &t_syn, & t_eq);
 
@@ -60,6 +63,7 @@ int main (int argc, char ** argv) {
     t_eq = design_stat.TimeOfEqCheck;
     t_syn = design_stat.TimeOfInvSyn;
     t_total = design_stat.TimeOfEqCheck + design_stat.TimeOfInvSyn;
+    n_cegar ++;
       
   }while(not vg.in_bad_state());
 

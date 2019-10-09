@@ -8,8 +8,7 @@
   	 "rst":"**RESET**", 
   	 "clk":"**CLOCK**",
   	 "en":"en",
-  	 "out":"**SO**",
-     "ui":"**KEEP**"
+  	 "out":"**SO**"
   },
 
   "instruction mapping": [],
