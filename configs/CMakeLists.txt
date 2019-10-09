@@ -1,0 +1,7 @@
+set(cmakeCOSAEnvPath "/home/vmcai2020/cosaEnv/bin/activate" )
+set(cmakeCOSAPath "/home/vmcai2020/CoSA/" )
+set(cmakeABCPath "/home/vmcai2020/abc/" )
+set(cmakeYOSYSPath "/home/vmcai2020/yosys/" )
+set(cmakeFREQHORNPath "/home/vmcai2020/grain/" )  
+set(cmakeCVC4Path "/home/vmcai2020/cvc4/" )
+set(cmakeZ3Path "")
