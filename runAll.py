@@ -4,7 +4,10 @@ import subprocess
 
 
 TestsAll = \
-  {"RC":[("RCrelchc","RelChc"),("RCpdrabc","PdrAbc"), ("RCpdrchc","PdrChc"), ("RCcvc4sy","Cvc4Sy"), ("RCgrain","Grain")]}
+  { 
+  #"RC":[("RCrelchc","RelChc"),("RCpdrabc","PdrAbc"), ("RCpdrchc","PdrChc"), ("RCcvc4sy","Cvc4Sy"), ("RCgrain","Grain")],
+  "SP":[("SPrelchc","RelChc"),("SPpdrabc","PdrAbc"), ("SPpdrchc","PdrChc"), ("SPcvc4sy","Cvc4Sy"), ("SPgrain","Grain")]
+  }
 
 def ClearVerifOutput(tests):
   cwd = os.getcwd()
