@@ -1,0 +1,21 @@
+{
+  "global invariants": [],
+
+  "instructions": [
+    {
+      "instruction" : "LOAD",
+      "ready signal": "xram_ack_delay_1",
+      "max bound"   : 20
+    },
+    {
+      "instruction" : "OPERATE",
+      "ready bound" : 1
+    },
+    {
+      "instruction" : "STORE",
+      "ready signal": "xram_ack_delay_1",
+      "max bound"   : 20
+    }
+  ]
+}
+
