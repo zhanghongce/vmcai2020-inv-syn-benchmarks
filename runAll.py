@@ -28,13 +28,17 @@ def RunTests(tests, timeout):
       if os.path.exists(test_result_file):
           os.remove(test_result_file)
       full_prg = os.path.join(test_prg_dir, prg)
-      print full_prg
+      print 'Run:', full_prg
       if not os.path.exists( full_prg ):
         print full_prg,'not available'
 
       os.chdir(test_prg_dir)
-      result_log = open('running_result.log','w')
-      subprocess.call(['./' + prg,str(timeout)], stdout = result_log, stderr = result_log)
+      #result_log = open('running_result.log','w')
+      process = subprocess.Popen(['./' + prg,str(timeout)], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+      print 'PID:', process.pid
+      #os.setpgid(process.pid, process.pid)
+      #process.getpgid(process.pid)
+      process.communicate()
       if os.path.exists(test_result_file):
         with open(test_result_file) as fin:
           print outDir,'\n--------------------------'
@@ -47,6 +51,6 @@ def RunTests(tests, timeout):
 
 ClearVerifOutput(TestsAll)
 RunTests(TestsAll, 300)
-ClearVerifOutput(TestsAll)
+#ClearVerifOutput(TestsAll)
     
     
