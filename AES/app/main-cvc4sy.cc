@@ -3,6 +3,7 @@
 #include <env.h>
 #include "artifact_utility.h"
 
+#include <ilang/util/log.h>
 #include <ilang/vtarget-out/vtarget_gen.h>
 #include <ilang/vtarget-out/inv-syn/inv_syn_cegar.h>
 #include <ilang/vtarget-out/inv-syn/sygus/sim_trace_extract.h>
@@ -11,8 +12,16 @@ const char * restext[] = {"Proved", "Invalid", "Unknown"};
 
 using namespace ilang;
 
-int main (int argc, char ** argv) {
 
+int loglevel(int argc, char **argv) {
+  for (int idx = 1; idx < argc; ++idx)
+    if(std::string(argv[idx]) == "fulllog")
+      return 0;
+  return 2;
+}
+
+int main (int argc, char ** argv) {
+  SetLogLevel(loglevel(argc,argv));
   int timeout = get_timeout(argc, argv);
 
   // extract the configurations
@@ -30,6 +39,7 @@ int main (int argc, char ** argv) {
   vtg_cfg.VerificationSettingAvoidIssueStage = true;
   vtg_cfg.YosysSmtFlattenDatatype = true;
   vtg_cfg.YosysSmtFlattenHierarchy = true;
+  vtg_cfg.YosysPath = YOSYSPath;
   vtg_cfg.InvariantSynthesisKeepMemory = false;
   vtg_cfg.InvariantCheckKeepMemory = false;
   vtg_cfg.CosaPyEnvironment = COSAEnvPath;

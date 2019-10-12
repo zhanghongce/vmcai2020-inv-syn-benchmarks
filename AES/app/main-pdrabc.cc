@@ -3,13 +3,22 @@
 #include "artifact_utility.h"
 #include <env.h>
 
+#include <ilang/util/log.h>
 #include <ilang/vtarget-out/vtarget_gen.h>
 #include <ilang/vtarget-out/inv-syn/inv_syn_cegar.h>
 
 using namespace ilang;
 
-int main (int argc, char ** argv) {
 
+int loglevel(int argc, char **argv) {
+  for (int idx = 1; idx < argc; ++idx)
+    if(std::string(argv[idx]) == "fulllog")
+      return 0;
+  return 2;
+}
+
+int main (int argc, char ** argv) {
+  SetLogLevel(loglevel(argc,argv));
   int timeout = get_timeout(argc, argv);
 
   // extract the configurations
@@ -29,6 +38,7 @@ int main (int argc, char ** argv) {
   vtg_cfg.VerificationSettingAvoidIssueStage = true;
   vtg_cfg.YosysSmtFlattenDatatype = false;
   vtg_cfg.YosysSmtFlattenHierarchy = true;
+  vtg_cfg.YosysPath = YOSYSPath;
   vtg_cfg.CosaPyEnvironment = COSAEnvPath;
   vtg_cfg.CosaPath = COSAPath;
   //vtg_cfg.Z3Path = "/home/hongce/z3s/bin";

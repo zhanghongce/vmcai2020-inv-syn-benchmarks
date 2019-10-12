@@ -10,16 +10,17 @@
 using namespace ilang;
 
 
-/// To verify the block level operation of ILA
-void verifyBlockLevel(Ila& model) {
 
+int loglevel(int argc, char **argv) {
+  for (int idx = 1; idx < argc; ++idx)
+    if(std::string(argv[idx]) == "fulllog")
+      return 0;
+  return 2;
 }
 
-
 int main (int argc, char ** argv) {
-
+  SetLogLevel(loglevel(argc,argv));
   int timeout = get_timeout(argc, argv);
-
 
   // set ilang option, operators like '<' will refer to unsigned arithmetics
   SetUnsignedComparison(true); 

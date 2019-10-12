@@ -2,14 +2,23 @@
 #include <env.h>
 #include "artifact_utility.h"
 
+#include <ilang/util/log.h>
 #include <ilang/util/fs.h>
 #include <ilang/vtarget-out/vtarget_gen.h>
 #include <ilang/vtarget-out/inv-syn/inv_syn_cegar.h>
 
 using namespace ilang;
 
-int main (int argc, char ** argv) {
 
+int loglevel(int argc, char **argv) {
+  for (int idx = 1; idx < argc; ++idx)
+    if(std::string(argv[idx]) == "fulllog")
+      return 0;
+  return 2;
+}
+
+int main (int argc, char ** argv) {
+  SetLogLevel(loglevel(argc,argv));
   int timeout = get_timeout(argc, argv);
 
   auto ila_model = BuildModel();
@@ -45,7 +54,7 @@ int main (int argc, char ** argv) {
   auto dirName = std::string("../");
   auto outDir  = dirName + "verification/Grain/";
 
-  int n_cegar = 0;
+  int n_cegar = 1;
   double t_eq = 0;
   double t_syn = 0;
   double t_total = 0;

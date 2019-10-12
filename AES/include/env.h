@@ -7,6 +7,6 @@
 #define YOSYSPath    ""
 #define FREQHORNPath "/home/hongce/ila/aeval/build/tools/bv/"
 #define CVC4Path     "/home/hongce/cvc-installs/latest/bin/"
-#define Z3PathFull   ""
+#define Z3PathFull   "/home/hongce/z3versions/z3-inv-syn-jan/build"
 
 #endif // ENV_H__

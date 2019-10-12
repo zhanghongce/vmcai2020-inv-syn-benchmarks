@@ -100,4 +100,6 @@ protected:
 
 }; // class AES
 
+#define set_result_aes(outDir, succeeded, total_sec, cegar_iter, syn_time, eq_time)  (set_result(outDir, succeeded, total_sec, AES_STATE_OPERATE + AES_STATE_WRITE_DATA, syn_time,eq_time))
+
 #endif // AES_ILA_H__

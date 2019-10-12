@@ -9,8 +9,16 @@
 
 using namespace ilang;
 
-int main (int argc, char ** argv) {
 
+int loglevel(int argc, char **argv) {
+  for (int idx = 1; idx < argc; ++idx)
+    if(std::string(argv[idx]) == "fulllog")
+      return 0;
+  return 2;
+}
+
+int main (int argc, char ** argv) {
+  SetLogLevel(loglevel(argc,argv));
   int timeout = get_timeout(argc, argv);
 
   // extract the configurations
@@ -21,22 +29,33 @@ int main (int argc, char ** argv) {
 
   VerilogGeneratorBase::VlgGenConfig vlg_cfg;
 
-  vtg_cfg.InvariantSynthesisReachableCheckKeepOldInvariant = false;
+  vtg_cfg.InvariantSynthesisReachableCheckKeepOldInvariant = true;
+  vtg_cfg.InvariantSynthesisKeepMemory = false;
+  vtg_cfg.InvariantCheckKeepMemory = false;
   vtg_cfg.MemAbsReadAbstraction = true; // enable read abstraction
   vtg_cfg.MaxBound = 40;                // bound of BMC
   vtg_cfg.CosaAddKeep = false;
   vtg_cfg.VerificationSettingAvoidIssueStage = true;
   vtg_cfg.YosysSmtFlattenDatatype = true;
   vtg_cfg.YosysSmtFlattenHierarchy = true;
-  vtg_cfg.YosysUndrivenNetAsInput = true;
+  vtg_cfg.YosysPath = YOSYSPath;
   vtg_cfg.CosaPyEnvironment = COSAEnvPath;
   vtg_cfg.CosaPath = COSAPath;
-  vtg_cfg.FreqHornPath = FREQHORNPath; //"/home/hongce/ila/aeval/build/tools/bv/";
-  vtg_cfg.FreqHornOptions = {"--const-bw=5 --ante-size=1 --conseq-size=1 --conseq-disj=1 --grammar-file=\"aes.gmr\""};
-  vtg_cfg.FreqHornHintsUseCnfStyle = false;
   vtg_cfg.CosaSolver = "btor";
+  vtg_cfg.Z3Path = "N/A";
+  vtg_cfg.AbcPath = "N/A";
+
+  vtg_cfg.FreqHornPath = FREQHORNPath;
+  vtg_cfg.FreqHornOptions = {
+    "--ante-size", "1", "--conseq-size", "1", 
+    "--cw","5", "--find-one",
+    "--skip-cnf","--skip-stat-collect --skip-const-check",
+    "--cross-bw", "--use-arith-add-sub", "--2-chance",
+    "--grammar aes.gmr"
+  };
 
   vlg_cfg.pass_node_name = true;  // whether to use node name in Verilog
+
 
   std::string RootPath = "..";
   std::string VerilogPath = RootPath + "/verilog/";
@@ -49,21 +68,31 @@ int main (int argc, char ** argv) {
   double t_total = 0;
   bool succeed = true;
   set_timeout(timeout, OutputPath, &n_cegar, &t_syn, & t_eq);
-
   { // save grammar file
-    std::string gmr = R"##(CTRL-STATE: S_m1.aes_reg_state, S_m1.byte_counter, S_m1.aes_time_counter
-CTRL-OUT: S_m1.byte_counter, S_m1.aes_time_counter
-DATA-OUT: S_m1.uaes_ctr, S_m1.block_counter
-DATA-IN: S_m1.aes_reg_ctr_i.reg_out, S_m1.block_counter, S_m1.operated_bytes_count
+    os_portable_mkdir(OutputPath+"inv-syn");
+    std::string gmr = R"##(CTRL-STATE: m1.aes_reg_state, m1.byte_counter, m1.aes_time_counter
+CTRL-OUT: m1.byte_counter, m1.aes_time_counter
+DATA-OUT: m1.uaes_ctr, m1.block_counter
+DATA-IN: m1.aes_reg_ctr_i.reg_out, m1.block_counter, m1.operated_bytes_count
 )##";
 
-    std::ofstream fout(OutputPath + "inv-syn/pipe.gmr");
+    std::ofstream fout(OutputPath + "inv-syn/aes.gmr");
     if (fout.is_open())
       fout << gmr;
     else
       succeed = false;
   } // save grammar file
 
+
+  std::vector<std::string> to_drop_states = {
+    "m1.encrypted_data_buf[127:0]",
+    "m1.mem_data_buf[127:0]",
+    "m1.data_out_reg[7:0]",
+    "m1.aes_128_i.out_reg[127:0]",
+    "m1.aes_reg_oplen_i.reg_out[15:0]",
+    "m1.aes_reg_opaddr_i.reg_out[15:0]",
+    "m1.aes_reg_key0_i.reg_out[127:0]",
+  };
 
   InvariantSynthesizerCegar vg(
       {}, // no include
@@ -89,6 +118,7 @@ DATA-IN: S_m1.aes_reg_ctr_i.reg_out, S_m1.block_counter, S_m1.operated_bytes_cou
       break; // no more cex found
     }
     vg.ExtractVerificationResult();
+    vg.CexGeneralizeRemoveStates(to_drop_states);
     vg.GenerateSynthesisTarget();
     if(vg.RunSynAuto()) {
       std::cerr << "Cex is reachable! Cegar failed" << std::endl;
@@ -105,7 +135,7 @@ DATA-IN: S_m1.aes_reg_ctr_i.reg_out, S_m1.block_counter, S_m1.operated_bytes_cou
 
   }while(not vg.in_bad_state());
 
-  set_result(OutputPath, succeed,  t_syn + t_eq , n_cegar , t_syn , t_eq);
+  set_result_aes(OutputPath, succeed,  t_syn + t_eq , n_cegar , t_syn , t_eq);
   return 0;
 }
 
