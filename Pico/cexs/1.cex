@@ -1,0 +1,8 @@
+2
+3
+m1.compressed_instr 0 0
+m1.instr_jal 0 0
+m1.is_lui_auipc_jal 0 0
+2
+m1.instr_bltu 0 0
+m1.instr_srai 0 0

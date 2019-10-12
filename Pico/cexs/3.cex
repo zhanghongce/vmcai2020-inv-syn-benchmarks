@@ -1,0 +1,242 @@
+44
+2
+m1.decoder_pseudo_trigger 0 0
+m1.mem_do_prefetch 0 0
+7
+m1.instr_bltu 0 0
+m1.instr_slli 0 0
+m1.instr_sltiu 0 0
+m1.instr_sltu 0 0
+m1.instr_srli 0 0
+m1.is_beq_bne_blt_bge_bltu_bgeu 0 0
+m1.is_sltiu_bltu_sltu 0 0
+7
+m1.instr_bltu 0 0
+m1.instr_slli 0 0
+m1.instr_sltiu 0 0
+m1.instr_sltu 0 0
+m1.instr_srli 0 0
+m1.is_sltiu_bltu_sltu 0 0
+m1.latched_store 0 0
+3
+m1.decoded_rs2 0 0
+m1.mem_do_rinst 0 0
+m1.reg_sh 0 0
+4
+m1.cpu_state 0 0
+m1.decoded_rs2 0 0
+m1.instr_retirq 0 0
+m1.reg_sh 0 0
+3
+m1.instr_jal 0 0
+m1.is_lui_auipc_jal 0 0
+m1.mem_do_prefetch 0 0
+4
+m1.instr_slli 0 0
+m1.instr_srli 0 0
+m1.is_lui_auipc_jal 0 0
+m1.is_lui_auipc_jal_jalr_addi_add_sub 0 0
+3
+m1.compressed_instr 0 0
+m1.instr_jal 0 0
+m1.is_lui_auipc_jal 0 0
+3
+m1.instr_auipc 0 0
+m1.is_compare 0 0
+m1.is_lui_auipc_jal_jalr_addi_add_sub 0 0
+4
+m1.cpu_state 0 0
+m1.decoded_rs2 0 0
+m1.mem_do_rinst 0 0
+m1.reg_sh 0 0
+3
+m1.is_compare 0 0
+m1.is_lui_auipc_jal 0 0
+m1.is_lui_auipc_jal_jalr_addi_add_sub 0 0
+2
+m1.cpu_state 0 0
+m1.decoder_pseudo_trigger 0 0
+7
+m1.instr_auipc 0 0
+m1.instr_blt 0 0
+m1.instr_slt 0 0
+m1.instr_slti 0 0
+m1.is_lui_auipc_jal 0 0
+m1.is_lui_auipc_jal_jalr_addi_add_sub 0 0
+m1.is_slti_blt_slt 0 0
+15
+m1.cpu_state 0 0
+m1.decoded_imm 0 0
+m1.decoded_rs2 0 0
+m1.instr_bge 0 0
+m1.instr_bgeu 0 0
+m1.instr_blt 0 0
+m1.instr_bltu 0 0
+m1.instr_bne 0 0
+m1.instr_slli 0 0
+m1.instr_slt 0 0
+m1.instr_slti 0 0
+m1.instr_sltiu 0 0
+m1.instr_sltu 0 0
+m1.instr_srli 0 0
+m1.mem_do_rinst 0 0
+3
+m1.instr_jal 0 0
+m1.is_lui_auipc_jal 0 0
+m1.is_sb_sh_sw 0 0
+15
+m1.cpu_state 0 0
+m1.decoded_imm 0 0
+m1.instr_bge 0 0
+m1.instr_bgeu 0 0
+m1.instr_blt 0 0
+m1.instr_bltu 0 0
+m1.instr_bne 0 0
+m1.instr_slli 0 0
+m1.instr_slt 0 0
+m1.instr_slti 0 0
+m1.instr_sltiu 0 0
+m1.instr_sltu 0 0
+m1.instr_srli 0 0
+m1.latched_store 0 0
+m1.reg_sh 0 0
+5
+m1.instr_blt 0 0
+m1.instr_slt 0 0
+m1.instr_slti 0 0
+m1.is_lui_auipc_jal_jalr_addi_add_sub 0 0
+m1.is_slti_blt_slt 0 0
+5
+m1.instr_blt 0 0
+m1.instr_slt 0 0
+m1.instr_slti 0 0
+m1.is_compare 0 0
+m1.is_slti_blt_slt 0 0
+3
+m1.instr_auipc 0 0
+m1.is_lb_lh_lw_lbu_lhu 0 0
+m1.is_lui_auipc_jal 0 0
+3
+m1.instr_auipc 0 0
+m1.is_lui_auipc_jal 0 0
+m1.is_sb_sh_sw 0 0
+5
+m1.instr_slli 0 0
+m1.instr_srli 0 0
+m1.is_beq_bne_blt_bge_bltu_bgeu 0 0
+m1.is_compare 0 0
+m1.mem_do_prefetch 0 0
+2
+m1.irq_active 0 0
+m1.irq_delay 0 0
+1
+m1.prefetched_high_word 0 0
+4
+m1.cpu_state 0 0
+m1.instr_jal 0 0
+m1.is_lui_auipc_jal 0 0
+m1.mem_do_rinst 0 0
+3
+m1.compressed_instr 0 0
+m1.instr_auipc 0 0
+m1.is_lui_auipc_jal 0 0
+3
+m1.instr_auipc 0 0
+m1.is_lui_auipc_jal 0 0
+m1.mem_do_prefetch 0 0
+3
+m1.instr_auipc 0 0
+m1.is_alu_reg_imm 0 0
+m1.is_lui_auipc_jal 0 0
+2
+m1.cpu_state 0 0
+m1.reg_sh 0 0
+6
+m1.instr_blt 0 0
+m1.instr_slli 0 0
+m1.instr_slt 0 0
+m1.instr_slti 0 0
+m1.instr_srli 0 0
+m1.is_slti_blt_slt 0 0
+7
+m1.cpu_state 0 0
+m1.instr_blt 0 0
+m1.instr_slli 0 0
+m1.instr_slt 0 0
+m1.instr_slti 0 0
+m1.instr_srli 0 0
+m1.is_slti_blt_slt 0 0
+4
+m1.instr_auipc 0 0
+m1.is_lui_auipc_jal 0 0
+m1.latched_rd 0 0
+m1.mem_do_rinst 0 0
+5
+m1.instr_slli 0 0
+m1.instr_srli 0 0
+m1.is_beq_bne_blt_bge_bltu_bgeu 0 0
+m1.is_compare 0 0
+m1.mem_do_rinst 0 0
+7
+m1.cpu_state 0 0
+m1.instr_slli 0 0
+m1.instr_srli 0 0
+m1.is_jalr_addi_slti_sltiu_xori_ori_andi 0 0
+m1.is_sb_sh_sw 0 0
+m1.latched_branch 0 0
+m1.latched_store 0 0
+5
+m1.instr_jal 0 0
+m1.instr_slli 0 0
+m1.instr_srli 0 0
+m1.is_alu_reg_imm 0 0
+m1.is_lui_auipc_jal_jalr_addi_add_sub 0 0
+3
+m1.instr_auipc 0 0
+m1.instr_jalr 0 0
+m1.is_lui_auipc_jal 0 0
+5
+m1.cpu_state 0 0
+m1.is_lb_lh_lw_lbu_lhu 0 0
+m1.is_sb_sh_sw 0 0
+m1.latched_branch 0 0
+m1.latched_store 0 0
+4
+m1.cpu_state 0 0
+m1.latched_rd 0 0
+m1.mem_do_prefetch 0 0
+m1.mem_do_rinst 0 0
+1
+m1.do_waitirq 0 0
+3
+m1.instr_auipc 0 0
+m1.instr_retirq 0 0
+m1.is_lui_auipc_jal 0 0
+2
+m1.instr_lui 0 0
+m1.is_lui_auipc_jal 0 0
+6
+m1.instr_bltu 0 0
+m1.instr_slli 0 0
+m1.instr_sltiu 0 0
+m1.instr_sltu 0 0
+m1.instr_srli 0 0
+m1.is_sltiu_bltu_sltu 0 0
+5
+m1.decoded_rd 0 0
+m1.instr_auipc 0 0
+m1.is_lui_auipc_jal 0 0
+m1.latched_rd 0 0
+m1.mem_do_rinst 0 0
+6
+m1.cpu_state 0 0
+m1.decoded_imm 0 0
+m1.instr_retirq 0 0
+m1.instr_slli 0 0
+m1.instr_srli 0 0
+m1.is_sb_sh_sw 0 0
+4
+m1.cpu_state 0 0
+m1.mem_do_prefetch 0 0
+m1.mem_do_rinst 0 0
+m1.reg_sh 0 0

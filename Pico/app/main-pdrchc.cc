@@ -7,8 +7,16 @@
 
 using namespace ilang;
 
-int main (int argc, char ** argv) {
 
+int loglevel(int argc, char **argv) {
+  for (int idx = 1; idx < argc; ++idx)
+    if(std::string(argv[idx]) == "fulllog")
+      return 0;
+  return 2;
+}
+
+int main (int argc, char ** argv) {
+  SetLogLevel(loglevel(argc,argv));
   int timeout = get_timeout(argc, argv);
 
   riscvILA_user riscvILA(0);
@@ -77,7 +85,7 @@ int main (int argc, char ** argv) {
     }
     
     vg.ExtractVerificationResult();
-    vg.CexGeneralizeRemoveStates({"m1.trace_data", "m1.timer"});
+    vg.CexGeneralizeRemoveStates({"m1.trace_data[35:0]", "m1.timer[31:0]","m1.count_cycle[63:0]","m1.count_instr[63:0]"});
     vg.GenerateSynthesisTarget();
     if(vg.RunSynAuto()) {
       std::cerr << "Cex is reachable! Cegar failed" << std::endl;

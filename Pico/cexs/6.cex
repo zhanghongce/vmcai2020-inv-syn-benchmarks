@@ -1,0 +1,4 @@
+1
+2
+m1.is_alu_reg_reg 0 0
+m1.is_beq_bne_blt_bge_bltu_bgeu 0 0

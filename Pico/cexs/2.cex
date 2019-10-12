@@ -1,0 +1,12 @@
+3
+3
+m1.compressed_instr 0 0
+m1.instr_sra 0 0
+m1.is_alu_reg_reg 0 0
+2
+m1.instr_bge 0 0
+m1.instr_blt 0 0
+3
+m1.compressed_instr 0 0
+m1.instr_lui 0 0
+m1.is_lui_auipc_jal 0 0

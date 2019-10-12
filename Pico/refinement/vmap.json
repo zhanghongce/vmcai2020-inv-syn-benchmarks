@@ -1,0 +1,125 @@
+{
+  "models": { "ILA":"m0" , "VERILOG": "m1" },
+  "state mapping": { 
+    "x0"        : "m1.dbg_reg_x0",
+    "x1"        : "m1.dbg_reg_x1" ,
+    "x2"        : "m1.dbg_reg_x2" ,
+    "x3"        : "m1.dbg_reg_x3" ,
+    "x4"        : "m1.dbg_reg_x4" ,
+    "x5"        : "m1.dbg_reg_x5" ,
+    "x6"        : "m1.dbg_reg_x6" ,
+    "x7"        : "m1.dbg_reg_x7" ,
+    "x8"        : "m1.dbg_reg_x8" ,
+    "x9"        : "m1.dbg_reg_x9" ,
+    "x10"       : "m1.dbg_reg_x10",
+    "x11"       : "m1.dbg_reg_x11",
+    "x12"       : "m1.dbg_reg_x12",
+    "x13"       : "m1.dbg_reg_x13",
+    "x14"       : "m1.dbg_reg_x14",
+    "x15"       : "m1.dbg_reg_x15",
+    "x16"       : "m1.dbg_reg_x16",
+    "x17"       : "m1.dbg_reg_x17",
+    "x18"       : "m1.dbg_reg_x18",
+    "x19"       : "m1.dbg_reg_x19",
+    "x20"       : "m1.dbg_reg_x20",
+    "x21"       : "m1.dbg_reg_x21",
+    "x22"       : "m1.dbg_reg_x22",
+    "x23"       : "m1.dbg_reg_x23",
+    "x24"       : "m1.dbg_reg_x24",
+    "x25"       : "m1.dbg_reg_x25",
+    "x26"       : "m1.dbg_reg_x26",
+    "x27"       : "m1.dbg_reg_x27",
+    "x28"       : "m1.dbg_reg_x28",
+    "x29"       : "m1.dbg_reg_x29",
+    "x30"       : "m1.dbg_reg_x30",
+    "x31"       : "m1.dbg_reg_x31",
+    "pc"        : "m1.reg_pc",
+    "count_cycle" : "m1.count_cycle",
+    "count_instr" : "m1.count_instr",
+    "dmem"      : "**MEM**dmem", // will remove later, same for the latter
+    "imem"      : "**MEM**imem"
+  },
+
+  "interface mapping": {
+     "resetn"        :           "**NRESET**", 
+     "clk"           :           "**CLOCK**",
+     "trap"          : "**KEEP**",
+     "mem_valid"     : "**KEEP**",
+     "mem_instr"     : "**KEEP**",
+     "mem_ready"     : "**KEEP**",
+
+     "mem_addr"      : "**KEEP**",
+     "mem_wdata"     : "**MEM**dmem.wdata",
+     "mem_wstrb"     : "**KEEP**",
+     "mem_rdata"     : "**KEEP**",
+
+     "mem_la_read"       : "**KEEP**",
+     "mem_la_write"      : "**KEEP**",
+     "mem_la_addr"       : "**KEEP**",
+     "mem_la_wdata"      : "**KEEP**",
+     "mem_la_wstrb"      : "**KEEP**",
+
+     "pcpi_valid"       : "**KEEP**",
+     "pcpi_insn"        : "**KEEP**",
+     "pcpi_rs1"         : "**KEEP**",
+     "pcpi_rs2"         : "**KEEP**",
+     "pcpi_wr"          : "**KEEP**",
+     "pcpi_rd"          : "**KEEP**",
+     "pcpi_wait"        : "**KEEP**",
+     "pcpi_ready"       : "**KEEP**",
+
+     "irq"      : "**KEEP**",
+     "eoi"      : "**KEEP**",
+
+     "rvfi_valid"       : "**KEEP**",
+     "rvfi_order"       : "**KEEP**",
+     "rvfi_insn"        : "**KEEP**",
+     "rvfi_trap"        : "**KEEP**",
+     "rvfi_halt"        : "**KEEP**",
+     "rvfi_intr"        : "**KEEP**",
+     "rvfi_mode"        : "**KEEP**",
+     "rvfi_rs1_addr"    : "**KEEP**",
+     "rvfi_rs2_addr"    : "**KEEP**",
+     "rvfi_rs1_rdata"   : "**KEEP**",
+     "rvfi_rs2_rdata"   : "**KEEP**",
+     "rvfi_rd_addr"     : "**KEEP**",
+     "rvfi_rd_wdata"    : "**KEEP**",
+     "rvfi_pc_rdata"    : "**KEEP**",
+     "rvfi_pc_wdata"    : "**KEEP**",
+     "rvfi_mem_addr"    : "**KEEP**",
+     "rvfi_mem_rmask"   : "**KEEP**",
+     "rvfi_mem_wmask"   : "**KEEP**",
+     "rvfi_mem_rdata"   : "**KEEP**",
+     "rvfi_mem_wdata"   : "**KEEP**",
+     "trace_valid"      : "**KEEP**",
+     "trace_data"       : "**KEEP**"
+  },
+
+  "mapping control" : [  
+                         "!(__MEM_dmem_0_ren) || ( m1.mem_rdata == __MEM_dmem_0_rdata )", // data match
+                         "!(__MEM_imem_0_ren) || ( m1.mem_rdata == __MEM_imem_0_rdata )", // data match
+                         // "~__START__ || (__IMEM_imem_0_rdata ==  m1.mem_rdata)", // 
+                         "(__START__ || __STARTED__) || (m1.mem_ready == 0)" // hold the design, if not started
+                      ],
+  "supplementary-info" : {
+    // the verilog side memory ports to keep
+    "memory-ports" : {
+        "dmem.ren":"m1.mem_valid && !m1.mem_instr && m1.mem_ready && (~|m1.mem_wstrb)",
+        "dmem.raddr":"m1.mem_addr[31:2]",
+        "dmem.rdata":"",
+        "imem.ren":"m1.mem_valid && m1.mem_instr && m1.mem_ready",
+        "imem.raddr":"m1.mem_addr[31:2]",
+        "imem.rdata":"",
+        "dmem.wen":"m1.mem_valid && !m1.mem_instr && m1.mem_ready && (|m1.mem_wstrb)",
+        "dmem.waddr":"m1.mem_addr[31:2]"
+    }
+  },
+  "post-value-holder"  : {
+    "pc_init":{ // or a list
+      "cond" : "#__START__#",
+      "val"  : "m1.reg_pc",
+      "width": 32
+    }
+  }
+
+}
