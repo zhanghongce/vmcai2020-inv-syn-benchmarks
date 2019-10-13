@@ -63,8 +63,11 @@ int main (int argc, char ** argv) {
   {
     std::cout << "Test CoSA: " << "(" << COSAPath  <<")" << std::endl;
     std::string prg = "CoSA";
-    auto res = os_portable_execute_shell({"bash", "../cosa-test/run.sh"}, outDir + "cosa-run.txt" , redirect_t::BOTH);
+    std::string cwd = os_portable_getcwd();
+    os_portable_chdir("../cosa-test/");
+    auto res = os_portable_execute_shell({"bash", "run.sh"}, outDir + "cosa-run.txt" , redirect_t::BOTH);
     std::cout << (res.subexit_normal ? "Okay" : "Error") << std::endl;
+    os_portable_chdir(cwd);
   }
 
   return 0;
