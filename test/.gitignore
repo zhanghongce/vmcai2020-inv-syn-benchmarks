@@ -1,0 +1,7 @@
+build/*
+include/env.h
+abc-cmds.txt
+cosa-run.txt
+cvc4-version.txt
+grain-cfg.txt
+yosys-version.txt

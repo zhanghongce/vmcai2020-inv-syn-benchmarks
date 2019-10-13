@@ -1,0 +1,16 @@
+[GENERAL]
+model_files:wrapper.v[wrapper],rst.ets
+assume_if_true: True
+abstract_clock: True
+[DEFAULT]
+bmc_length: 6
+precondition: reset_done = 1_1
+
+[variable_map_assert]
+description:"variable_map_assert"
+properties:(variable_map_assert__p4__ = 1_1)
+assumptions:(noreset__m0__ = 1_1) & (variable_map_assume__m2__ = 1_1) & (invariant_assume__m5__ = 1_1) & (invariant_assume__m6__ = 1_1) & (invariant_assume__m7__ = 1_1) & (invariant_assume__m8__ = 1_1) & (invariant_assume__m9__ = 1_1) & (invariant_assume__m10__ = 1_1) & (invariant_assume__m11__ = 1_1) & (invariant_assume__m12__ = 1_1) & (issue_decode__m13__ = 1_1) & (issue_valid__m14__ = 1_1)
+prove: True
+verification: safety
+strategy: ALL
+expected: True
