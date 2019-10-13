@@ -1,0 +1,5 @@
+CTRL-STATE: m1.aes_reg_state, m1.byte_counter, m1.aes_time_counter
+CTRL-OUT: m1.byte_counter, m1.aes_time_counter
+DATA-OUT: m1.uaes_ctr, m1.block_counter
+DATA-IN: m1.aes_reg_ctr_i.reg_out, m1.block_counter, m1.operated_bytes_count
+

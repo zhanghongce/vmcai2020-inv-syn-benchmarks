@@ -5,13 +5,12 @@ import subprocess
 
 TestsAll = \
   { 
-  #"RC":[("RCrelchc","RelChc"),("RCpdrabc","PdrAbc"), ("RCpdrchc","PdrChc"), ("RCcvc4sy","Cvc4Sy"), ("RCgrain","Grain")],
-  #"SP":[("SPrelchc","RelChc"),("SPpdrabc","PdrAbc"), ("SPpdrchc","PdrChc"), ("SPcvc4sy","Cvc4Sy"), ("SPgrain","Grain")],
-  #"AES":[("AESrelchc","RelChc"),("AESpdrabc","PdrAbc"), ("AESpdrchc","PdrChc"), ("AEScvc4sy","Cvc4Sy"), ("AESgrain","Grain")],
-  #"Pico":[("PICOrelchc","RelChc"),("PICOpdrabc","PdrAbc"), ("PICOpdrchc","PdrChc"), ("PICOcvc4sy","Cvc4Sy"), ("PICOgrain","Grain")],
-  "GB":[("GBpdrchc","PdrChc"), ("GBcvc4sy","Cvc4Sy"), ("GBgrain","Grain")]
+  "RC":  [("RCgrain","Grain")],
+  "SP":  [("SPgrain","Grain")],
+  "AES": [("AESgrain","Grain")],
+  "Pico":[("PICOgrain","Grain")],
+  "GB":  [("GBgrain","Grain")]
   }
-
 
 def ClearVerifOutput(tests):
   cwd = os.getcwd()
@@ -60,7 +59,7 @@ def RunTests(tests, timeout):
 
 
 ClearVerifOutput(TestsAll)
-RunTests(TestsAll, 3600)
+RunTests(TestsAll, 3600*10)
 #ClearVerifOutput(TestsAll)
     
     

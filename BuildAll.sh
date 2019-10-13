@@ -19,7 +19,6 @@ mkdir -p verification/PdrAbc
 mkdir -p verification/Grain
 mkdir -p verification/Cvc4Sy
 cd ..
-
 echo '-----build SP----------'
 cd SP
 bash buildAll.sh
@@ -29,7 +28,6 @@ mkdir -p verification/PdrAbc
 mkdir -p verification/Grain
 mkdir -p verification/Cvc4Sy
 cd ..
-
 echo '-----build AES----------'
 cd AES
 bash buildAll.sh
@@ -39,7 +37,6 @@ mkdir -p verification/PdrAbc
 mkdir -p verification/Grain
 mkdir -p verification/Cvc4Sy
 cd ..
-
 echo '-----build Pico----------'
 cd Pico
 bash buildAll.sh
@@ -49,7 +46,6 @@ mkdir -p verification/PdrAbc
 mkdir -p verification/Grain
 mkdir -p verification/Cvc4Sy
 cd ..
-
 echo '-----build GB----------'
 cd GB
 bash buildAll.sh
