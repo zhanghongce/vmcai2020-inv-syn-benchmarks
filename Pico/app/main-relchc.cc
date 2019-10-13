@@ -49,6 +49,7 @@ int main (int argc, char ** argv) {
 
   vg.GenerateTargets();
 
+  os_portable_execute_shell({"sed", "-i", "s/(|picorv32_n rst| |__SvBI__|)/(not (|picorv32_n resetn| |__SvBI__|))/g",OutputPath+"ADD/wrapper.smt2"});
   // os_portable_execute_shell({"bash",outDir+"INC/run.sh"}, outDir + "yosys-log.txt" , redirect_t::BOTH, 0);
   auto res = os_portable_execute_shell({"z3",OutputPath+"ADD/wrapper.smt2"}, OutputPath + "eqcheck-invsyn.txt" , redirect_t::BOTH, timeout);
   

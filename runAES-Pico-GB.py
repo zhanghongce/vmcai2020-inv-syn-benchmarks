@@ -5,15 +5,24 @@ import argparse
 import signal
 from customized_timeout import TimeoutException,TimeoutError
 
+proc_to_kill = {"PdrChc":"z3", "Cvc4Sy": "cvc4", "PdrAbc":"abc", "RelChc":"z3"}
 
-TestsGrain = \
+TestSucc = \
+  [("GB",[("GBpdrchc","PdrChc"), ("GBcvc4sy","Cvc4Sy")])]
+  
+TestFull = \
   [
-  ("RC",  [("RCgrain","Grain")]),
-  ("SP",  [("SPgrain","Grain")]),
-  ("AES", [("AESgrain","Grain")]),
-  ("Pico",[("PICOgrain","Grain")]),
-  ("GB",  [("GBgrain","Grain")])
-  ]
+  ("AES",[("AESrelchc","RelChc"),("AESpdrabc","PdrAbc"), ("AESpdrchc","PdrChc"), ("AEScvc4sy","Cvc4Sy")]),
+  ("Pico",[("PICOrelchc","RelChc"),("PICOpdrabc","PdrAbc"), ("PICOpdrchc","PdrChc"), ("PICOcvc4sy","Cvc4Sy")]),
+  ("GB",[("GBpdrchc","PdrChc"), ("GBcvc4sy","Cvc4Sy"), ("GBgrain","Grain")])]
+  
+def CountRuns(tests):
+  ret_len = 0
+  for d,l in tests:
+    ret_len += len(l)
+  return ret_len
+  
+  
 
 def getNumbers(fin):
   res = fin.readline()
@@ -64,6 +73,7 @@ def RunTests(tests, timeout, total):
       process = subprocess.Popen(['./' + prg,str(timeout)], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
       print 'PID:', process.pid
       print 'Method:',outDir
+      proc_name = proc_to_kill[outDir] if outDir in proc_to_kill else ''
       #os.setpgid(process.pid, process.pid)
       #process.getpgid(process.pid)
       try:
@@ -73,6 +83,8 @@ def RunTests(tests, timeout, total):
         print 'Try killing subprocess...',
         try:
           process.terminate()
+          if len(proc_name)>0:
+            os.system('pkill '+proc_name)
           print 'Done'
         except OSError:
           print 'Unable to kill'
@@ -82,7 +94,8 @@ def RunTests(tests, timeout, total):
         print 'Try killing subprocess...',
         try:
           process.terminate()
-          os.system('pkill cvc4')
+          if len(proc_name)>0:
+            os.system('pkill '+proc_name)
           print 'Done'
         except OSError:
           print 'Unable to kill'
@@ -128,19 +141,23 @@ parser.add_argument('-t','--timeout',
                     default=2*60*60,
                     help='The time limit in seconds')
                     
+parser.add_argument('-a','--all', action='store_true',
+                    default=False,
+                    help='Run all the tests (default: only GBpdrchc and GBcvc4sy)')
+                    
 args = parser.parse_args()
-testset = TestsGrain
+testset = TestFull if args.all else TestSucc
 
 print '--------------------------'
 print '|        Jobs            |'
 print '--------------------------'
-print 'Will launch (%d) jobs ' % len(testset)
+print 'Will launch (%d) jobs ' % CountRuns(testset)
 print 'Time-out limit (sec): ',args.timeout
 print '--------------------------'
 print 
 
 ClearVerifOutput(testset)
-RunTests(testset, args.timeout, len(testset))
+RunTests(testset, args.timeout, CountRuns(testset))
 #ClearVerifOutput(TestsAll)
     
 

@@ -1,2 +1,4 @@
 */result-stat.txt
 configs/local.cfg
+*.pyc
+backups/*
