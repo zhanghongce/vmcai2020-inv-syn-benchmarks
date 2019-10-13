@@ -147,7 +147,7 @@ m1.cpu_state 8 128 64 32 8 4 2 1
     vg.GenerateVerificationTarget();
 
     set_verify_timeout(10*60, OutputPath, &n_cegar, &t_syn, &t_eq);
-    auto no_cex = vg.RunVerifAuto("ADD");
+    auto no_cex = vg.RunVerifAuto("ADD","pid.txt");
     cancel_verify_timeout(timeout, OutputPath, &n_cegar, &t_syn, &t_eq);
 
     vg.VerifGenCex(RootPath+"/cexs/"+std::to_string(n_cegar)+".vcd");

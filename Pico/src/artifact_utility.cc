@@ -89,6 +89,15 @@ void handle_alarm_verif( int sig ) {
   chdir(init_cwd.c_str());
   set_result(glb_outDir, true, syn_time + eq_time, cegar_iter, syn_time, eq_time);
 
+  std::ifstream pid_fin(glb_outDir + "ADD/pid.txt");
+  pid_t pid = 0;
+  if (pid_fin.is_open()){
+    pid_fin >> pid;
+    pid_fin.close();
+  }
+  if (pid != 0)
+    kill(-pid, SIGTERM);
+
   kill(-getpid(), SIGTERM);
   exit(0);
 }

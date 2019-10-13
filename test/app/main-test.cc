@@ -9,7 +9,7 @@ using namespace ilang;
 
 
 int main (int argc, char ** argv) {
-
+  SetLogLevel(2);
 
   std::string outDir = "../";
   // test z3
