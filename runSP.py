@@ -68,7 +68,7 @@ def RunTests(tests, timeout, total):
         print 'Try killing subprocess...',
         try:
           process.terminate()
-          os.system('pkill cvc4')
+          os.system('pkill -n cvc4')
           print 'Done'
         except OSError:
           print 'Unable to kill'
@@ -78,7 +78,7 @@ def RunTests(tests, timeout, total):
         print 'Try killing subprocess...',
         try:
           process.terminate()
-          os.system('pkill cvc4')
+          os.system('pkill -n cvc4')
           print 'Done'
         except OSError:
           print 'Unable to kill'

@@ -3,6 +3,7 @@ import shutil
 import subprocess
 import argparse
 import signal
+import time
 from customized_timeout import TimeoutException,TimeoutError
 
 proc_to_kill = {"PdrChc":"z3", "Cvc4Sy": "cvc4", "PdrAbc":"abc", "RelChc":"z3"}
@@ -14,7 +15,7 @@ TestFull = \
   [
   ("AES",[("AESrelchc","RelChc"),("AESpdrabc","PdrAbc"), ("AESpdrchc","PdrChc"), ("AEScvc4sy","Cvc4Sy")]),
   ("Pico",[("PICOrelchc","RelChc"),("PICOpdrabc","PdrAbc"), ("PICOpdrchc","PdrChc"), ("PICOcvc4sy","Cvc4Sy")]),
-  ("GB",[("GBpdrchc","PdrChc"), ("GBcvc4sy","Cvc4Sy"), ("GBgrain","Grain")])]
+  ("GB",[("GBpdrchc","PdrChc"), ("GBcvc4sy","Cvc4Sy")])]
   
 def CountRuns(tests):
   ret_len = 0
@@ -74,6 +75,7 @@ def RunTests(tests, timeout, total):
       print 'PID:', process.pid
       print 'Method:',outDir
       proc_name = proc_to_kill[outDir] if outDir in proc_to_kill else ''
+      #print (proc_name)
       #os.setpgid(process.pid, process.pid)
       #process.getpgid(process.pid)
       try:
@@ -83,23 +85,25 @@ def RunTests(tests, timeout, total):
         print 'Try killing subprocess...',
         try:
           process.terminate()
-          if len(proc_name)>0:
-            os.system('pkill '+proc_name)
           print 'Done'
         except OSError:
           print 'Unable to kill'
-        process.wait()     
-        
+        process.wait()  
       except TimeoutError:
         print 'Try killing subprocess...',
         try:
           process.terminate()
-          if len(proc_name)>0:
-            os.system('pkill '+proc_name)
           print 'Done'
         except OSError:
           print 'Unable to kill'
-        process.wait()     
+        process.wait()   
+        
+      if len(proc_name)>0:
+          pkill_result = os.system('pkill -n '+proc_name) 
+          if pkill_result == 256:
+            time.sleep(1)
+            pkill_result = os.system('pkill -n '+proc_name) 
+          
           
       if os.path.exists(test_result_file):
         with open(test_result_file) as fin:
