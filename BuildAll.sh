@@ -1,3 +1,4 @@
+#!/bin/bash
 # cmake define vars
 #define COSAEnvPath "/home/vmcai2020/cosaEnv/bin/activate"
 #define COSAPath "/home/vmcai2020/CoSA/"
@@ -8,3 +9,55 @@
 #define Z3Path ""
 # a
 #
+
+echo '-----build RC----------'
+cd RC
+bash buildAll.sh
+mkdir -p verification/RelChc
+mkdir -p verification/PdrChc
+mkdir -p verification/PdrAbc
+mkdir -p verification/Grain
+mkdir -p verification/Cvc4Sy
+cd ..
+
+echo '-----build SP----------'
+cd SP
+bash buildAll.sh
+mkdir -p verification/RelChc
+mkdir -p verification/PdrChc
+mkdir -p verification/PdrAbc
+mkdir -p verification/Grain
+mkdir -p verification/Cvc4Sy
+cd ..
+
+echo '-----build AES----------'
+cd AES
+bash buildAll.sh
+mkdir -p verification/RelChc
+mkdir -p verification/PdrChc
+mkdir -p verification/PdrAbc
+mkdir -p verification/Grain
+mkdir -p verification/Cvc4Sy
+cd ..
+
+echo '-----build Pico----------'
+cd Pico
+bash buildAll.sh
+mkdir -p verification/RelChc
+mkdir -p verification/PdrChc
+mkdir -p verification/PdrAbc
+mkdir -p verification/Grain
+mkdir -p verification/Cvc4Sy
+cd ..
+
+echo '-----build GB----------'
+cd GB
+bash buildAll.sh
+mkdir -p verification/RelChc
+mkdir -p verification/PdrChc
+mkdir -p verification/PdrAbc
+mkdir -p verification/Grain
+mkdir -p verification/Cvc4Sy
+cd ..
+
+

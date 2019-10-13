@@ -2,6 +2,7 @@
 #include <env.h>
 #include "artifact_utility.h"
 
+#include <ilang/util/log.h>
 #include <ilang/util/fs.h>
 #include <ilang/vtarget-out/vtarget_gen.h>
 #include <ilang/vtarget-out/inv-syn/inv_syn_cegar.h>
