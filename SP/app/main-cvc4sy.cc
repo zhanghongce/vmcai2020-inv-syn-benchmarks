@@ -90,6 +90,7 @@ int main (int argc, char ** argv) {
     }while(not vg.in_bad_state());
   vg.GenerateInvariantVerificationTarget(); // finally we revalidate the result
 
+  vg.GetInvariants().ExportToFile(outDir+"inv.txt",false);
   set_result(outDir, succeed,  t_syn + t_eq , n_cegar , t_syn , t_eq);
   return 0;
 }

@@ -122,6 +122,7 @@ int main (int argc, char ** argv) {
   }while(true); // first generate enough guesses
 
 
+  vg.GetInvariants().ExportToFile(OutputPath+"inv.txt",false);
   set_result(OutputPath, succeed,  t_syn + t_eq , n_cegar , t_syn , t_eq);
   return 0;
 }

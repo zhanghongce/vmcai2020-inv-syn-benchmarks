@@ -224,6 +224,7 @@ retry:
 
   }while(not vg.in_bad_state());
 
+  vg.GetInvariants().ExportToFile(OutputPath+"inv.txt",false);
   set_result(OutputPath, succeed,  t_syn + t_eq , n_cegar , t_syn , t_eq);
   return 0;
 }

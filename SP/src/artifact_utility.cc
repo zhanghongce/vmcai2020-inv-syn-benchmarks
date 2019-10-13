@@ -32,7 +32,7 @@ void set_result(const std::string & outDir, bool succeeded, double total_sec, in
   if (succeeded)
     fout << "DONE\n";
   else
-    fout << "LIMIT REACHED\n";
+    fout << "KILLED\n";
   fout << total_sec << std::endl;
   fout << cegar_iter<< std::endl; // iter
   fout << syn_time << std::endl; // syn

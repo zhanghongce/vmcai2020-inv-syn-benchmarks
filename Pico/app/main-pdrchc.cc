@@ -105,6 +105,7 @@ int main (int argc, char ** argv) {
   if (vg.in_bad_state())
     succeed = false;
 
+  vg.GetInvariants().ExportToFile(OutputPath+"inv.txt",false);
   set_result(OutputPath, succeed,  t_syn + t_eq , n_cegar , t_syn , t_eq);
 
   return 0;

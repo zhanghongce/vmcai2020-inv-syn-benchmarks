@@ -3,9 +3,9 @@ import shutil
 import subprocess
 
 
-TestsSP = \
+TestsRC = \
   [
-  ("SP",[("SPpdrabc","PdrAbc"), ("SPpdrchc","PdrChc"), ("SPgrain","Grain"), ("SPrelchc","RelChc"), ("SPcvc4sy","Cvc4Sy") ])
+  ("RC",[("RCrelchc","RelChc"),("RCpdrabc","PdrAbc"), ("RCpdrchc","PdrChc"), ("RCcvc4sy","Cvc4Sy"), ("RCgrain","Grain")])
   ]
 
 
@@ -55,8 +55,8 @@ def RunTests(tests, timeout):
       # execute with timeout
 
 
-ClearVerifOutput(TestsSP)
-RunTests(TestsSP, 3600)
+ClearVerifOutput(TestsRC)
+RunTests(TestsRC, 3600)
 #ClearVerifOutput(TestsAll)
     
     

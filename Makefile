@@ -7,3 +7,6 @@ local:
 	rm -rf configs/local.cfg
 	cp configs/local-local.cfg configs/local.cfg
 	bash BuildAll.sh
+
+clean:
+	bash CleanAll.sh

@@ -136,6 +136,7 @@ DATA-IN: m1.aes_reg_ctr_i.reg_out, m1.block_counter, m1.operated_bytes_count
 
   }while(not vg.in_bad_state());
 
+  vg.GetInvariants().ExportToFile(OutputPath+"inv.txt",false);
   set_result_aes(OutputPath, succeed,  t_syn + t_eq , n_cegar , t_syn , t_eq);
   return 0;
 }

@@ -135,6 +135,7 @@ VAR-GROUP: m1.ex_wb_reg_wen, m1.ex_wb_rd
     }while(not vg.in_bad_state());
 
 
+  vg.GetInvariants().ExportToFile(outDir+"inv.txt",false);
   set_result(outDir, succeed,  t_syn + t_eq , n_cegar , t_syn , t_eq);
   return 0;
 }
